@@ -10,7 +10,7 @@ _____
 
 # Part 2: Visualizing Tabular data
 
-### Bivariate Case
+### [Bivariate Case](https://github.com/EvansDataScience/VisualAnalytics_2_tabularDataBiv)
 
 _____
 
@@ -23,6 +23,14 @@ Contents:
 3. [Categorical-Numerical case.](#part3)
 
 4. [Numerical-Numerical case.](#part4)
+
+**Exercises**: <br>
+
+- [Exercise 1](#ex1)
+- [Exercise 2](#ex2)
+- [Exercise 3](#ex3)
+- [Exercise 4](#ex4)
+- [Exercise 5](#ex5)
 
 _____
 
@@ -186,7 +194,8 @@ bars2 = bars1 + facet_wrap( ~ Daytime ,nrow = 1)
 bars2 + coord_flip() + theme(axis.text.y = element_text(size=4,angle = 45)) 
 ```
 
-<span style="color:red"> Exercise:<br> Turn the bars into lollipop with the right components.
+<a id='ex1'></a>
+<span style="color:red"> Exercise 1:<br> Turn the bars into lollipop with the right components.
 </span>
 
 Once you see a plot of two bivariate categorical data, you may consider other plots:
@@ -215,7 +224,8 @@ heat4 = heat3 + theme(axis.text.x = element_text(angle = 90, vjust = 0.6),
 heat4 + labs(y="Crime")
 ```
 
-<span style="color:red"> Exercise:<br> Change the heatplot to ascending order, where intensity goes from yellow to purple.
+<a id='ex2'></a>
+<span style="color:red"> Exercise 2:<br> Change the heatplot to ascending order, where intensity goes from yellow to purple.
 </span>
 _____
 
@@ -479,7 +489,8 @@ all3=minsMaxsMd + scale_colour_manual(name="Trends",
 all3+coord_flip()
 ```
 
-<span style="color:red"> Exercise:<br> Complete the information needed in the previous plots.
+<a id='ex3'></a>
+<span style="color:red"> Exercise 3:<br> Complete the information needed in the previous plots.
 </span>
 
 It is very common to hear in scientific texts about the mean difference test known as the **one-way anova**, which beyond describing, as we have done, seeks to show if the mean of the numerical variable varies or not accross the values of the categorical groups.
@@ -651,8 +662,8 @@ scatp5 = scatp4 +  scale_x_continuous(expand = c(0, 0)) +
 scatp5
 ```
 
-
-<span style="color:red"> Exercise:<br> Complete the elements missing in the previous plots.
+<a id='ex4'></a>
+<span style="color:red"> Exercise 4:<br> Complete the elements missing in the previous plots.
 </span>
 
 _____
