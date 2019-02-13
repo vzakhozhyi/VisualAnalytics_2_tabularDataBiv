@@ -1,43 +1,126 @@
-<br> 
-<center><img src="http://i.imgur.com/sSaOozN.png" width="500"></center>
+---
+title: "V2 TabularData Bivariate Class Exercises"
+author: "Vitalii Zakhozhyi"
+---
 
-## Course: Visual Analytics for Policy and Management
+**Calling data and preparing it for exercises**
 
-### Prof. José Manuel Magallanes, PhD 
+```{r collect, eval=FALSE}
+link="https://github.com/EvansDataScience/data/raw/master/crime.RData"
+load(file = url(link))
+names(crime)
+head(crime)
+str(crime,width = 100,strict.width='cut')
+```
 
-_____
-<a id='part1'></a>
+```{r table, eval=FALSE}
+library(magrittr)
+CrimeTotal=table(crime$crimecat,crime$Occurred.DayTime)%>% #create table and then...
+        prop.table() %>% #compute proportion and then...
+        "*"(100)%>% # multiply by 100 and then...
+        round(2) #...round to to decimals
+CrimeTotal
 
-# Part 2: Visualizing Tabular data
+CrimeCol=table(crime$crimecat,crime$Occurred.DayTime)%>%
+         prop.table(margin = 2)%>%   # 2 is % by column
+         "*"(100)%>%
+         round(3)
 
-### [Bivariate Case](https://github.com/EvansDataScience/VisualAnalytics_2_tabularDataBiv)
+CrimeCol
+```
 
-_____
+```{r convertToDFgg,eval=FALSE}
+df.T=as.data.frame(CrimeTotal) # table of proportion based on total
+names(df.T)=c('Crime','Daytime','Percent') #renaming
+head(df.T)
+```
 
-Contents:
+```{r plotTable_gg, eval=FALSE}
+library(ggplot2)                           
+base = ggplot(df.T, aes(Daytime,Crime))
+tablePlot1 = base + geom_point(aes(size = Percent), colour = "gray") 
+tablePlot2 = tablePlot1 + geom_text(aes(label = Percent),
+                                    nudge_x = 0.1,
+                                    size=2)
+tablePlot3 = tablePlot2 + scale_size_continuous(range=c(0,10)) #change 10?
+tablePlot4 = tablePlot3 + theme_minimal() # less ink
+tablePlot5 = tablePlot4 + theme(legend.position="none") # no legend
+tablePlot5
+```
 
-1. [Intro.](#part1)
 
-2. [Categorical-Categorical case.](#part2) 
+```{r flip_facet, eval=FALSE}
+df.C=as.data.frame(CrimeCol)
+colnames(df.C)=c('Crime','Daytime','Percent')
+base  = ggplot(df.C, aes(x = reorder(Crime, Percent), y = Percent ) ) 
+bars1 = base + geom_bar( stat = "identity" )
+bars2 = bars1 + facet_wrap( ~ Daytime ,nrow = 1) 
+bars3 = bars2 + coord_flip() + theme(axis.text.y = element_text(size=4,angle = 45))
+bars3
+```
 
-3. [Categorical-Numerical case.](#part3)
 
-4. [Numerical-Numerical case.](#part4)
 
-**Exercises**: <br>
+```{r}
+base = ggplot(df.C, aes(x = reorder(Crime, Percent), y = Percent)) 
+lol1 = base + geom_segment(y = 0,
+                           yend = Percent) +
+        geom_point()
+lol1
+```
 
-- [Exercise 1](#ex1)
-- [Exercise 2](#ex2)
-- [Exercise 3](#ex3)
-- [Exercise 4](#ex4)
 
-_____
+```{r}
+base = ggplot(tableFreq, aes(x=locale,pct)) 
+lolliplot1=base + geom_segment(aes(y = 0, 
+                                   x = locale, 
+                                   yend = pct, 
+                                   xend = locale), color = "grey50") 
+lolliplot1 + geom_point()
+```
 
-We analyze two variables to find out if there might be some kind of association between them. Even though that may be difficult to clearly identify, bivariate analysis still helps reveal _signs_ of association that may serve at least to raise concern.
 
-As before, the nature of the data allows for some particular analytical techniques, while also providing some limitations to our inferences. Let's see what we can visualize with the different combinations of data.
 
-This time, I will use the [data about crime](https://data.seattle.gov/Public-Safety/Crime-Data/4fs7-3vj5) from the Seattle Open Data portal:
+**Exercise 1: Turn the bars into lollipop with the right components.**
+
+Excercise 1 solution:
+
+```{r}
+
+```
+
+
+
+**Exercise 2: Change the heatplot to ascending order, where intensity goes from yellow to purple.**
+
+Excercise 2 solution:
+```{r}
+
+```
+
+
+
+**Exercise 3: Complete the information needed in the previous plots.**
+
+Excercise 3 solution:
+```{r}
+
+```
+
+
+
+**Exercise 4: Complete the elements missing in the previous plots.**
+
+Excercise 4 solution:
+```{r}
+
+```
+
+
+
+
+
+
 
 ```{r collect, eval=FALSE}
 link="https://github.com/EvansDataScience/data/raw/master/crime.RData"
